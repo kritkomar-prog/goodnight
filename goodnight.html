@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Добраніч солодких снів Яна </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #020111, #000000);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Текст */
+h1 {
+  position: relative;
+  color: white;
+  text-align: center;
+  font-size: clamp(36px, 8vw, 90px);
+  text-shadow: 0 0 20px #7ab6ff, 0 0 40px #3b5cff;
+  animation: pulse 3s infinite alternate;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.8; }
+  to { transform: scale(1.05); opacity: 1;}
+}
+
+/* Кнопка */
+button {
+  display: block;
+  margin: 20px auto 0;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  padding: 10px 25px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Зірки */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: blink 3s infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+/* Падаюча зірка */
+.meteor {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, white, transparent);
+  animation: fall 2s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes fall {
+  from { transform: translate(0,0); }
+  to { transform: translate(-300px,300px); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div>
+  <h1>Добраніч<br>солодких снів Яна ✨</h1>
+  <button onclick="playMusic()">обовязково до прослуховування 🌙</button>
+</div>
+
+<!-- Музика -->
+<audio id="music" loop>
+  <source src="https://mp3tales.info/audio/spjat_ustalye_igrushki.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Спокійна музика
+function playMusic() {
+  let music = document.getElementById("music");
+  music.volume = 0.3;
+  music.play();
+}
+
+// Зірки
+for (let i = 0; i < 60; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.animationDelay = Math.random() * 5 + "s";
+  document.body.appendChild(star);
+}
+
+// Падаючі зірки
+setInterval(() => {
+  let meteor = document.createElement("div");
+  meteor.className = "meteor";
+  meteor.style.top = Math.random() * 50 + "vh";
+  meteor.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(meteor);
+  setTimeout(() => meteor.remove(), 2000);
+}, 3000);
+</script>
+
+</body>
+</html>
